@@ -14,25 +14,26 @@
         <script>
             
 
-let box = document.querySelector('.box');
-let images = ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg'];
+const box = document.querySelector('.box');
+const images = ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg'];
 
 window.addEventListener('scroll', () => {
-    let scrollPosition = window.scrollY;
-    let viewportHeight = window.innerHeight;
+    // مقدار دقیق اسکرول
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    // ارتفاع هر بخش برای هر عکس
+    const sectionHeight = window.innerHeight;
     
-    // تقسیم بر ارتفاع دید؛ Math.min تضمین می‌کند از عکس ششم فراتر نرود
-    let imageIndex = Math.floor(scrollPosition / viewportHeight);
+    // محاسبه ایندکس
+    let index = Math.floor(scrollTop / sectionHeight);
     
-    if (imageIndex >= images.length) {
-        imageIndex = images.length - 1;
-    }
-
-    box.style.backgroundImage = `url(${images[imageIndex]})`;
+    // جلوگیری از خطا (ایندکس نباید از 0 کمتر یا از 5 بیشتر بشه)
+    if (index < 0) index = 0;
+    if (index >= images.length) index = images.length - 1;
     
-    // برای تست: این خط را در کنسول مرورگر می‌توانی ببینی که عکس چندم است
-    console.log("Current Image Index:", imageIndex);
+    // اعمال عکس
+    box.style.backgroundImage = `url(${images[index]})`;
 });
+
 
       </script>
 </body>
