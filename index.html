@@ -15,26 +15,36 @@
             
 
 let box = document.querySelector('.box');
-let images = ['img1.jpg','img2.jpg','img3.jpg','img4.jpg','img5.jpg','img6.jpg'];
- if (imageIndex >= images.length) imageIndex = images.length - 1;
+let images = ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg'];
 
-
-window.addEventListener('scroll', () => {
+// یک تابع برای تغییر عکس که همیشه درست کار کند
+function changeBackground() {
     let scrollPosition = window.scrollY;
     let viewportHeight = window.innerHeight;
+    let totalHeight = document.documentElement.scrollHeight - viewportHeight;
     
-    // فرمول جدید برای توزیع بهتر عکس‌ها در کل طول صفحه
-    let totalScrollableHeight = document.documentElement.scrollHeight - viewportHeight;
-    let scrollPercentage = scrollPosition / totalScrollableHeight;
-    let imageIndex = Math.floor(scrollPercentage * images.length);
-
-    // جلوگیری از خطا وقتی اسکرول به ته ته می‌رسد
-    if (imageIndex >= images.length) imageIndex = images.length - 1;
+    // محاسبه درصد اسکرول (بین 0 تا 1)
+    let scrollFraction = scrollPosition / totalHeight;
+    
+    // پیدا کردن ایندکس عکس (0 تا 5)
+    let imageIndex = Math.floor(scrollFraction * images.length);
+    
+    // اطمینان از اینکه ایندکس از محدوده خارج نشود (مخصوصاً در انتهای صفحه)
+    if (imageIndex >= images.length) {
+        imageIndex = images.length - 1;
+    }
+    if (imageIndex < 0) {
+        imageIndex = 0;
+    }
 
     box.style.backgroundImage = `url(${images[imageIndex]})`;
-});
+}
 
-});
-        </script>
+// گوش دادن به اسکرول
+window.addEventListener('scroll', changeBackground);
+
+// فراخوانی یکباره در لحظه لود شدن برای نمایش اولین عکس
+changeBackground();
+      </script>
 </body>
 </html>
