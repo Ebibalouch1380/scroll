@@ -22,9 +22,18 @@ let images = ['img1.jpg','img2.jpg','img3.jpg','img4.jpg','img5.jpg','img6.jpg']
 window.addEventListener('scroll', () => {
     let scrollPosition = window.scrollY;
     let viewportHeight = window.innerHeight;
-    let imageIndex = Math.floor(scrollPosition / viewportHeight) % images.length;
     
+    // فرمول جدید برای توزیع بهتر عکس‌ها در کل طول صفحه
+    let totalScrollableHeight = document.documentElement.scrollHeight - viewportHeight;
+    let scrollPercentage = scrollPosition / totalScrollableHeight;
+    let imageIndex = Math.floor(scrollPercentage * images.length);
+
+    // جلوگیری از خطا وقتی اسکرول به ته ته می‌رسد
+    if (imageIndex >= images.length) imageIndex = images.length - 1;
+
     box.style.backgroundImage = `url(${images[imageIndex]})`;
+});
+
 });
         </script>
 </body>
