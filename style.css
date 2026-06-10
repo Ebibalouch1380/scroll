@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: end;
-    transition: background-image 0.05s;
+    transition: background-image 0.10s;
 
 
 }
