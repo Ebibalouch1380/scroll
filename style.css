@@ -19,11 +19,3 @@ body {
     transition: background-image 0.3s ease-in-out; /* برای اینکه نرم عوض بشه */
 }
 
-h2 {
-    color: white;
-    text-align: center;
-    margin-top: 45vh;
-    font-family: sans-serif;
-    font-size: 3rem;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-}
